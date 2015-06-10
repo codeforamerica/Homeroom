@@ -1,0 +1,1 @@
+{"mixinTypes":["contribution"],"builders":{"configs":{}},"runners":{"configs":{}},"type":"ruby","attributes":{"language":["ruby"],"contribute_branch":["master"],"contribute_mode":["contribute"]}}

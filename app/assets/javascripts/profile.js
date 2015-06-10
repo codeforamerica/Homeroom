@@ -5,6 +5,8 @@ $(function() {
     var profile_data = $("#profile-data")
     var attendance_events = profile_data.data('attendance-events')
     var discipline_incidents = profile_data.data('discipline-incidents')
+    var mcas_results = profile_data.data('mcas_results')
+	 var star_results = profile_data.data('star_results')
     var student_name = $("#student-name").text()
 
     function isAbsence(event) { return event.absence }
@@ -36,10 +38,20 @@ $(function() {
     }]
 
 
-    var behavior_series = [{
-            name: 'Behavior incidents',
+    var behavior_series = {
+            name: 'Behavior Incidents',
             data: discipline_incidents_by_year
-        },]
+        }
+    
+    var mcas_series = {
+            name: 'MCAS Growth',
+            data: mcas_results
+        }
+    
+	 var star_series = { 
+            name: 'STAR Percentile',
+            data: star_results
+        }
 
     var options = {
       chart: {
@@ -115,6 +127,17 @@ $(function() {
                       '</div>';
       $('#chart').html(zeroHtml);
     }
+    
+    function removeSeries(seriesName) {
+      var chart = $('#chart').highcharts();
+      for(var i = chart.series.length - 1; i > -1; i--)
+      {
+        if(chart.series[i].name == seriesName){
+          chart.series[i].remove();console.log("removing: " + seriesName);
+        }
+          
+      }
+    }
 
     // Default view is attendance series graph
     options.series = attendance_series
@@ -124,18 +147,34 @@ $(function() {
     var chart;
     checkZero(options) ? zeroDraw() : chart = new Highcharts.Chart(options);
 
-	  $("#chart-type").on('change', function(){
-	    var selVal = $("#chart-type").val();
-	    if(selVal == "attendance" || selVal == '') {
-	        options.series = attendance_series
-          options.title.text = 'absences or tardies'
-	        options.xAxis.categories = attendance_school_years
-	    }
-	    else if(selVal == "behavior") {
-	        options.series = behavior_series
-          options.title.text = 'behavior incidents'
-	        options.xAxis.categories = discipline_school_years
-	    }
+	  $("#graph-select").chosen().on('change', function(e, params) {
+       
+        if (params.deselected !== undefined) {
+          var deselected = params.deselected;
+          if (deselected == "attendance"){
+            removeSeries("Absences");
+            removeSeries("Tardies");
+          } else if (deselected == "behavior"){
+            removeSeries(behavior_series.name);
+          } else if (deselected == "mcas-growth"){
+            removeSeries(mcas_series.name);
+          } else if (deselected == "star-percentile"){
+            removeSeries(star_series.name);
+          } 
+          
+        } else if (params.selected !== undefined) {
+          var selected = params.selected;
+          if (selected == "attendance"){
+            $('#chart').highcharts().addSeries(attendance_series[0]);
+            $('#chart').highcharts().addSeries(attendance_series[1]);
+          } else if (selected == "behavior"){
+            $('#chart').highcharts().addSeries(behavior_series);
+          } else if (selected == "mcas-growth"){
+            $('#chart').highcharts().addSeries(mcas_series);
+          } else if (selected == "star-percentile"){
+            $('#chart').highcharts().addSeries(star_series);
+          } 
+        }
 	    // else if(selVal == "mcas-growth") {
 	    //     options.series = mcas_series
 	    //     options.yAxis.plotLines[0].label.text = "MCAS Growth warning: Less than 40 points"
@@ -148,7 +187,7 @@ $(function() {
 	    //     options.yAxis.plotLines[0].value = "40"
 	    //     options.xAxis.categories = ["Sept. 2010 - 11", "Jan. 2010 - 11", "May 2011 - 12", "Sept. 2011 - 12", "Jan. 2011 - 12", "May 2011 - 12", "Sept. 2012 - 13", "Jan. 2012 - 13", "May 2012 - 13", "Sept. 2013 - 14", "Jan. 2013 - 14", "May 2013 - 14"]
 	    // }
-      checkZero(options) ? zeroDraw() : chart = new Highcharts.Chart(options);
+      //checkZero(options) ? zeroDraw() : chart = new Highcharts.Chart(options);
 	});
   }
 });
