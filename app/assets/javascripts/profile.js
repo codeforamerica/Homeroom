@@ -172,12 +172,13 @@ $(function() {
     percentile_yaxis.min = 0
     percentile_yaxis.max = 100
 
-    var plotline_style = {
+    var mcas_growth_plotline = {
       color: '#B90504',
       width: 1,
       zIndex: 3,
+      value: 40,
       label: {
-        text: '',
+        text: 'MCAS Growth warning: Less than 40 points',
         align: 'center',
         style: {
           color: '#999999'
@@ -185,13 +186,19 @@ $(function() {
       }
     }
 
-    var mcas_growth_plotline = $.extend({}, plotline_style)
-    mcas_growth_plotline.label.text = 'MCAS Growth warning: Less than 40 points'
-    mcas_growth_plotline.value = 40
-
-    var star_plotline = $.extend({}, plotline_style)
-    star_plotline.label.text = 'STAR Percentile warning: Less than 40 points'
-    star_plotline.value = 40
+    var star_plotline = {
+      color: '#B90504',
+      width: 1,
+      zIndex: 3,
+      value: 40,
+      label: {
+        text: 'STAR Percentile warning: Less than 40 points',
+        align: 'center',
+        style: {
+          color: '#999999'
+        }
+      }
+    }
 
     // Default view is attendance series
     options.series = attendance_series
