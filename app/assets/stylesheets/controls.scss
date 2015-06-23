@@ -30,12 +30,12 @@
   clear: both;
 }
 
-#column-group-dropdown  {
+#column-group-dropdown, #graph-dropdown {
   display: inline-block;
   float: left;
 }
 
-#column-group-select {
+#column-group-select, #graph-select {
   width: 360px;
   @media screen and (max-width: $phase1) {
     width: 280px;

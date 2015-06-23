@@ -8,19 +8,18 @@
 
 	   <div id="student-info">
 			<h1 id="student-name"><%= @presenter.full_name %></h1>
-			<p>Home Phone: <strong>(617) 938-3948</strong></p>
+			<p>Home Phone: <strong>(617) 938-3949</strong></p>
 		</div>
-
-		<div id="graph-dropdown" class="dropdown">
-			<p>Graph:</p>
-			<select id="chart-type">
-		    	<option value="attendance">Attendance</option>
+    <div id="graph-dropdown" class="dropdown">
+      <p>Graph:</p>
+      <select id="graph-select" class="chosen-select" data-placeholder="Choose information to show..." tabindex="4" multiple>
+		    	<option value="attendance" selected>Attendance</option>
 		    	<option value="behavior">Behavior</option>
 		    	<option value="mcas-growth">MCAS Growth</option>
 		    	<option value="star-percentile">STAR Percentile</option>
-			</select>
-		</div>
-
+      </select> 
+    </div>
+        
 	  <div id="chart"></div>
 
 	  <% if @student.school_years.present? %>
