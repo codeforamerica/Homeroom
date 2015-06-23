@@ -160,6 +160,12 @@ $(function() {
       }
     }
 
+    var x_axis_schoolyears = {
+      type: 'linear',
+      categories: [],
+      dateTimeLabelFormats: {}
+    }
+
     function zeroDraw(){
       $('#chart').empty();
       var zeroHtml =  '<div class="zero-case">' +
@@ -184,26 +190,42 @@ $(function() {
 	    if (selVal == "attendance" || selVal == '') {
 	        options.series = attendance_series
           options.title.text = 'absences or tardies'
-	        options.xAxis.categories = schoolYears(attendance_events)
-	    } else if (selVal == "behavior") {
-	        options.series = behavior_series
+          options.xAxis = x_axis_schoolyears
+          options.xAxis.categories = schoolYears(attendance_events)
+          options.yAxis.plotLines[0].label.text = ""
+          options.yAxis.plotLines[0].value = 0
+          options.yAxis.min = undefined
+          options.yAxis.max = undefined
+      } else if (selVal == "behavior") {
+          options.series = behavior_series
           options.title.text = 'behavior incidents'
+          options.xAxis = x_axis_schoolyears
           options.xAxis.categories = schoolYears(discipline_incidents)
+          options.yAxis.plotLines[0].label.text = ""
+          options.yAxis.plotLines[0].value = 0
+          options.yAxis.min = undefined
+          options.yAxis.max = undefined
       } else if (selVal == "mcas-growth") {
           options.series = mcas_growth_series
           options.title.text = 'MCAS Growth'
           options.xAxis = x_axis_datetime
-          // options.yAxis.plotLines[0].label.text = "MCAS Growth warning: Less than 40 points"
-          // options.yAxis.plotLines[0].value = "40"
+          options.yAxis.plotLines[0].label.text = "MCAS Growth warning: Less than 40 points"
+          options.yAxis.plotLines[0].value = "40"
       } else if (selVal == "mcas-scaled") {
           options.series = mcas_scaled_series
           options.title.text = 'MCAS Scaled'
           options.xAxis = x_axis_datetime
+          options.yAxis.plotLines[0].label.text = ""
+          options.yAxis.plotLines[0].value = 0
+          options.yAxis.min = undefined
+          options.yAxis.max = undefined
       } else if (selVal == "star") {
           options.series = star_series
           options.xAxis = x_axis_datetime
-	        // options.yAxis.plotLines[0].label.text = "STAR Percentile warning: Less than 40 points"
-	        // options.yAxis.plotLines[0].value = "40"
+          options.yAxis.min = 0
+          options.yAxis.max = 100
+	        options.yAxis.plotLines[0].label.text = "STAR Percentile warning: Less than 40 points"
+	        options.yAxis.plotLines[0].value = "40"
 	    }
       checkZero(options) ? zeroDraw() : chart = new Highcharts.Chart(options);
 	});
