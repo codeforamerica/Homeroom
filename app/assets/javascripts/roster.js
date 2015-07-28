@@ -11,8 +11,12 @@ $(function() {
     });
 
     // Show/hide column groups using Chosen plugin
-    $(".demographics").hide();
-    $("#column-group-select").chosen().on('change', function(e, params) {
+    $(".language").hide()
+    $(".sped").hide()
+    $(".program").hide()
+    $(".free-reduced").hide()
+    $("#column-group-select").chosen({width: "110%"})
+      .on('change', function(e, params) {
       if (params.deselected !== undefined) {
         var assessment = params.deselected
         $('.' + assessment).hide();
@@ -23,11 +27,16 @@ $(function() {
     });
 
     // Roster tooltip
+
+    // Risk level tooltip
+    var roster_rooltip_template = $('#roster-tooltip-template').html()
+    var rendered = Mustache.render(roster_rooltip_template)
+
     $('#my-tooltip').tooltipster({
-      content: $('<div class="warning-key"><div class="warning-header"><div class="warning-dot"></div><h6>Warning Indicators</h6></div><div class="warning-set"><p><strong>MCAS Performance:</strong> Warning</p><p><strong>MCAS Growth:</strong> Less than 40 points</p><p><strong>STAR Percentile:</strong> Less than 40 points</p><p><strong>STAR Reading IRL:</strong> A year or more behind</p></div></div>'),
-      position: 'bottom-right'
-    });
-    // Table interactions
+      content: rendered,
+      position: 'bottom-right',
+      contentAsHTML: true
+    })
 
     // Turn table rows into links to student profiles
     $('tbody tr').click(function () {

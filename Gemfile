@@ -39,7 +39,7 @@ gem 'spring',        group: :development
 
 group :development, :test do
   gem 'rack-test'
-  gem "factory_girl_rails"
+  gem 'factory_girl_rails'
   gem 'rspec-rails', '~> 3.0'
   gem 'capybara'
   gem 'database_cleaner'
@@ -47,11 +47,15 @@ group :development, :test do
   gem 'faker'
   gem 'timecop'
   gem 'rails-erd'  # to auto-generate ERD and better understand the data structure
+  gem 'teaspoon-jasmine'
+end
+
+group :development do
+  gem 'pivotal_git_scripts'
 end
 
 # Auth
 gem 'devise'
-gem 'twilio-ruby', '~> 3.12'
 
 # Better seeds
 gem 'seedbank'
@@ -60,12 +64,8 @@ gem 'seedbank'
 gem 'probability'
 gem 'rubystats'
 
-# Handle Excel files
-gem 'paperclip'
-gem 'roo'
-
 # Output PDFs
-gem 'prawn'
+gem 'pdfkit'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

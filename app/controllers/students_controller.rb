@@ -1,3 +1,5 @@
+require 'csv'
+
 class StudentsController < ApplicationController
 
   before_action :authenticate_educator!
@@ -5,12 +7,19 @@ class StudentsController < ApplicationController
 
   def show
     @student = Student.find(params[:id])
-    @presenter = StudentPresenter.new @student
-    @attendance_events = @student.attendance_events.sort_by_school_year
-    @discipline_incidents = @student.discipline_incidents.sort_by_school_year
-    @mcas_results = @student.mcas_results.order(:date_taken)
-    @star_results = @student.star_results.order(:date_taken)
+    @presenter = StudentPresenter.new(@student)
+    @chart_data = StudentProfileChart.new(@student).chart_data
+    @risk = StudentRiskLevel.new(@student)
+
     @roster_url = homeroom_students_path(@student.homeroom)
+    @csv_url = student_path(@student) + ".csv"
+    @student_url = student_path(@student)
+
+    respond_to do |format|
+      format.html
+      format.csv { render csv: StudentProfileCsvExporter.new(@student).profile_csv_export, filename: 'export' }
+      format.pdf { render text: PDFKit.new(@student_url).to_pdf }
+    end
   end
 
   def index

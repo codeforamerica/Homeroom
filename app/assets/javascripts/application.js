@@ -19,5 +19,9 @@
 //= require tablesort.min
 //= require tablesort.numeric
 //= require mcas_sort
+//= require mustache.min
+//= require risk_sort
 //= require roster
+//= require chart_settings
+//= require chart_functions
 //= require profile
