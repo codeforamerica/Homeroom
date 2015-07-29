@@ -1,4 +1,4 @@
-require 'rails_helper'
+  require 'rails_helper'
 require 'capybara/rspec'
 
 describe 'educator exports a student profile', :type => :feature do
@@ -18,7 +18,7 @@ describe 'educator exports a student profile', :type => :feature do
     before(:each) do
       educator_sign_in(educator)
       visit "/students/#{student.id}"
-      click_on 'Export'
+      click_on 'CSV'
     end
 
     context 'to csv' do

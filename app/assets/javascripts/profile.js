@@ -140,4 +140,9 @@ $(function() {
       contentAsHTML: true
     })
   }
+
+  $("#export-button").on("click", function() {
+    $("#export, .export-dropdown").toggleClass('active');
+  });
+
 })

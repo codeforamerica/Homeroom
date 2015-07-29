@@ -1,20 +1,44 @@
  /* STUDENT PROFILE */
 
-#export-button {
-  float: right;
-  display: inline;
-  position: relative;
-  padding: 3px 15px;
-  margin-top: 18px;
-  border-radius: 4px;
-  background-color: $white;
-  color: $gray;
-  border: 1px solid $light-line;
-}
 
 #export {
-  display: inline;
-  clear: both;
+  float: right;
+  position: relative;
+  margin-top: 15px;
+
+  &.active, li:hover {
+    background-color: #d5d5d5;
+  }
+
+  a {
+    display: block;
+    color: $gray;
+    word-spacing: 5px;
+    padding: 6px 25px;
+  }
+
+  li {
+      list-style: none;
+  }
+
+  &, .export-dropdown {
+    background: $white;
+    border: 1px solid $light-line;
+    border-radius: 4px;
+  }
+
+  .export-dropdown {
+    display: none;
+    position: absolute;
+    top: 110%;
+    left: 0;
+    right: 0;
+    padding: 0;
+
+    &.active {
+      display: block;
+    }
+  }
 }
 
 #risk-pill {
