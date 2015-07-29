@@ -3,7 +3,12 @@
       <%= link_to "< Back to Roster", @roster_url %>
     </div>
     <div id="export">
-      <%= link_to "Export &#9662;".html_safe, @csv_url, method: "get", id: 'export-button' %>
+      <a id="export-button"><%= "Export &#9662;".html_safe %></a>
+      <ul class="export-dropdown">
+        <li><%= link_to "PDF".html_safe, @csv_url, method: "get" %></li>
+        <li><%= link_to "CSV".html_safe, @csv_url, method: "get" %></li>
+        <li><%= link_to "Excel".html_safe, @csv_url, method: "get" %></li>
+      </ul>
     </div>
   </div>
 
@@ -109,5 +114,4 @@
       </div>
     </div>
   </script>
-
 <%= tag("div", id: "chart-data", data: @chart_data) %>
