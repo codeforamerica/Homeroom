@@ -1,4 +1,5 @@
 **.orig
+.DS_Store
 /log
 /tmp
 /sketch
@@ -7,6 +8,7 @@ coverage
 config/local_env.yml
 config/initializers/capistrano_server.rb
 db/seeds/users/educators.seeds.rb
+node_modules
 
 ## Environment normalisation:
 /.bundle
@@ -15,3 +17,5 @@ db/seeds/users/educators.seeds.rb
 
 # unless supporting rvm < 1.11.0 or doing something fancy, ignore this:
 .rvmrc
+
+node_modules

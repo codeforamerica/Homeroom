@@ -64,16 +64,16 @@
 }
 
 #roster {
-	background: url('<%= asset_path("roster_pillar.png") %>') no-repeat;
+	background: url("/assets/roster_pillar.png") no-repeat;
 }
 
 
 #profile {
-	background: url('<%= asset_path("profile_pillar.png") %>') no-repeat;
+	background: url("/assets/profile_pillar.png") no-repeat;
 }
 
 #interventions {
-	background: url('<%= asset_path("interventions_pillar.png") %>') no-repeat;
+	background: url("/assets/interventions_pillar.png") no-repeat;
 }
 
 .circular {
@@ -93,7 +93,7 @@
 	border-radius: 8px;
 	-webkit-border-radius: 8px;
 	-moz-border-radius: 8px;
-	background: url('<%= asset_path("teachers.png") %>') no-repeat;
+	background: url("/assets/teachers.png") no-repeat;
 	@media screen and (min-width: 1200px) {
 		width: 750px;
 	}
@@ -103,7 +103,7 @@
 	display: inline-block;
 	width: 210px;
 	height: 60px;
-	background: url('<%= asset_path("student-insights-logo-small.png") %>') no-repeat;
+	background: url("/assets/student-insights-logo-small.png") no-repeat;
 }
 
 .logo-list {

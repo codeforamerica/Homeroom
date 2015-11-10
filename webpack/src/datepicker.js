@@ -1,5 +1,4 @@
 $(function() {
-
   if ($('body').hasClass('students') || $('body').hasClass('homerooms')) {
 
     window.datepicker_options = {
@@ -14,6 +13,4 @@ $(function() {
     $(".datepicker").datepicker(window.datepicker_options);
 
   }
-
 });
-
