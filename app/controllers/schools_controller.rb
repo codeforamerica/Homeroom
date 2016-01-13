@@ -24,4 +24,24 @@ class SchoolsController < ApplicationController
     @top_mcas_math_concerns = homeroom_queries.top_mcas_math_concerns.first(limit)
     @top_mcas_ela_concerns = homeroom_queries.top_mcas_ela_concerns.first(limit)
   end
+
+  def overview
+    @serialized_data = {
+      :students => overview_students(Time.new),
+      :intervention_types => InterventionType.all
+    }
+  end
+
+  private
+  def overview_students(time_now)
+    current_school_year = DateToSchoolYear.new(time_now).convert
+    Student.includes(:interventions, :discipline_incidents).map do |student|
+      student.as_json.merge({
+        :interventions => student.interventions.as_json,
+        :discipline_incidents_count => student.discipline_incidents.select do |incident|
+          incident.school_year == current_school_year
+        end.size
+      })
+    end
+  end
 end
